@@ -19,7 +19,6 @@ from djangoProject import settings
 
 
 def index(request):
-    session_key = request.session.session_key
     event = models.Event.objects.filter(event_id=16)
     user = models.UserInfo.objects.filter(user_id=1)
     response = HttpResponse()
@@ -34,8 +33,7 @@ def index(request):
         ppp = requests.post(url, data)
     except:
         print("net err")
-    response.set_cookie('JSESSIONID', session_key, expires=datetime.now())
-    return HttpResponse("Hello, 7th world welcome for You." + o.user.user_name + session_key)
+    return HttpResponse("Hello, 7th world welcome for You." + o.user.user_name)
 
 
 

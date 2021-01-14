@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '6ln4t%6(o0*)g6y+rbap)!(t=r__-escg6vae@51*@(puvjkl7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','47.94.159.35']
 
 
 # Application definition
@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'daily',
         'USER': 'root',
-        'PASSWORD': '123456',
+        'PASSWORD': '12345678',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
@@ -132,4 +132,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_ROOT=r'/data/'
-MEDIA_URL='http://static.zhuyelong.cn/'
+MEDIA_URL='http://static.ai.zhuyelong.cn/'
+
+CV_FACE_MODEL_PATH=r"C:\ProgramData\Anaconda3\envs\tf\Lib\site-packages\cv2\data\haarcascade_frontalface_alt2.xml"
+

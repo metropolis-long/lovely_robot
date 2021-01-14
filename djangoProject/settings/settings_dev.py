@@ -134,3 +134,5 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT=r'D:/temp/'
 MEDIA_URL='http://static.zhuyelong.cn/'
+
+CV_FACE_MODEL_PATH=r"C:\ProgramData\Anaconda3\envs\tf\Lib\site-packages\cv2\data\haarcascade_frontalface_alt2.xml"
