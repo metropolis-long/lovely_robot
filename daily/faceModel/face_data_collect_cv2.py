@@ -18,7 +18,7 @@ def CatchPICFromVideo(window_name, camera_idx, catch_pic_num, path_name):
     # 识别出人脸后要画的边框的颜色，RGB格式
     color = (0, 255, 0)
 
-    num = 140
+    num = 322
     while cap.isOpened():
         ok, frame = cap.read()  # 读取一帧数据
         if not ok:
@@ -63,4 +63,4 @@ def CatchPICFromVideo(window_name, camera_idx, catch_pic_num, path_name):
 
 
 if __name__ == '__main__':
-    CatchPICFromVideo("catch_face_data", 0, 320 - 1,r'D:\data\face_data\oo')  # 采集200张，保存在######这个文件夹下面
+    CatchPICFromVideo("catch_face_data", 0, 640, r'D:\data\face_mine')  # 采集200张，保存在######这个文件夹下面

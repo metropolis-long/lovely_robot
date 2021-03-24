@@ -84,5 +84,5 @@ def load_dataset(path_name):
 
 
 if __name__ == '__main__':
-    images, labels = load_dataset("D:/data/face_data")
+    images, labels = load_dataset("D:/data/face_mine")
     print(labels)
