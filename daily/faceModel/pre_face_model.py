@@ -45,6 +45,7 @@ if __name__ == '__main__':
                 # 截取脸部图像提交给模型识别这是谁
                 image = frame[y - 10: y + h + 10, x - 10: x + w + 10]
                 face_probe = model.face_predict(image)  # 获得预测值
+                print(face_probe)
                 cv2.rectangle(frame, (x - 10, y - 10), (x + w + 10, y + h + 10), color, thickness=2)
                 frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # cv2和PIL中颜色的hex码的储存顺序不同
                 pilimg = Image.fromarray(frame)
@@ -52,6 +53,7 @@ if __name__ == '__main__':
                 font = ImageFont.truetype("simkai.ttf", 20, encoding="utf-8")  # 参数1：字体文件路径，参数2：字体大小
                 draw.text((x + 25, y - 95), 'long:{:.2%}'.format(face_probe[0]), (255, 0, 0), font=font)
                 draw.text((x + 25, y - 70), 'bao:{:.2%}'.format(face_probe[1]), (255, 0, 0), font=font)
+                draw.text((x + 25, y - 45), 'oo:{:.2%}'.format(face_probe[3]), (255, 0, 0), font=font)
                 frame = cv2.cvtColor(np.array(pilimg), cv2.COLOR_RGB2BGR)
 
         cv2.imshow("ShowTime", frame)

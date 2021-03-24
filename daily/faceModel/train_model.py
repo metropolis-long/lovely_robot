@@ -31,13 +31,16 @@ class Dataset:
              img_channels=1, nb_classes=5):  # 灰度图 所以通道数为1 5个类别 所以分组数为5
         # 加载数据集到内存
         images, labels = load_dataset(self.path_name)
-
-        train_images, test_images, train_labels, test_labels = train_test_split(images, labels, test_size=0.3,
-                                                                                random_state=random.randint(0,
-                                                                                                            100))  # 将总数据按0.3比重随机分配给训练集和测试集
-
-        train_images = train_images.reshape(train_images.shape[0], img_rows, img_cols,
-                                            img_channels)  # 由于TensorFlow需要通道数，我们上一步设置为灰度图，所以这里为1，否则彩色图为3
+        # 将总数据按0.3比重随机分配给训练集和测试集
+        train_images, test_images, \
+        train_labels, test_labels = train_test_split(
+            images, labels, test_size=0.3,
+            random_state=random.randint(0,100))
+        # 由于TensorFlow需要通道数，我们上一步设置为灰度图，所以这里为1，否则彩色图为3
+        train_images = train_images.reshape(
+            train_images.shape[0],
+            img_rows, img_cols,
+            img_channels)
         test_images = test_images.reshape(test_images.shape[0], img_rows, img_cols, img_channels)
         self.input_shape = (img_rows, img_cols, img_channels)
 
@@ -107,7 +110,7 @@ class CNN(tf.keras.Model):
 
         # 给出输入属于各个类别的概率
         result = self.predict(image)
-        # print('result:', result[0])
+        print('result:', result)
 
         # 返回类别预测结果
         return result[0]
@@ -154,10 +157,10 @@ if __name__ == '__main__':
 
     for epoch in range(EPOCHS):
 
-        train_ds = tf.data.Dataset.from_tensor_slices((dataset.train_images, dataset.train_labels)).shuffle(300).batch(
-            batch)
-        test_ds = tf.data.Dataset.from_tensor_slices((dataset.test_images, dataset.test_labels)).shuffle(300).batch(
-            batch)
+        train_ds = tf.data.Dataset.from_tensor_slices((dataset.train_images, dataset.train_labels))\
+            .shuffle(300).batch(batch)
+        test_ds = tf.data.Dataset.from_tensor_slices((dataset.test_images, dataset.test_labels))\
+            .shuffle(300).batch(batch)
 
         for images, labels in train_ds:
             train_step(images, labels)

@@ -1,9 +1,6 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
 import cv2
-import sys
-
-from PIL import Image
 
 from djangoProject.settings.base_settings import CV_FACE_MODEL_PATH
 
@@ -12,7 +9,8 @@ def CatchPICFromVideo(window_name, camera_idx, catch_pic_num, path_name):
     cv2.namedWindow(window_name)
 
     # 视频来源，可以选择摄像头或者视频
-    cap = cv2.VideoCapture(r'D:\data\face_data\@@@@\5.mp4')
+    path = r'D:\data\face_data\@@@@\5.mp4'
+    cap = cv2.VideoCapture(camera_idx)
 
     # 告诉OpenCV使用人脸识别分类器（这里填你自己的OpenCV级联分类器地址）
     classfier = cv2.CascadeClassifier(CV_FACE_MODEL_PATH)
@@ -65,4 +63,4 @@ def CatchPICFromVideo(window_name, camera_idx, catch_pic_num, path_name):
 
 
 if __name__ == '__main__':
-    CatchPICFromVideo("catch_face_data", 0, 320 - 1,r'D:\data\face_data\@@@@')  # 采集200张，保存在######这个文件夹下面
+    CatchPICFromVideo("catch_face_data", 0, 320 - 1,r'D:\data\face_data\oo')  # 采集200张，保存在######这个文件夹下面

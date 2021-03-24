@@ -1,5 +1,4 @@
 import os
-import sys
 import numpy as np
 import cv2
 
@@ -73,7 +72,7 @@ def load_dataset(path_name):
     images = np.array(images)
     print(images.shape)
 
-    # 标注数据（采用onehot编码），'chengzihang'文件夹下都是我的脸部图像，全部指定为0 其他是我舍友的，分别不同指定标签（请注意必须从0开始算标签）
+    # 标注数据（采用onehot编码），文件夹下都是我的脸部图像，全部指定为0 其他是我舍友的，分别不同指定标签（请注意必须从0开始算标签）
     temp = 0
     for label in labels:
         if label.endswith('######'):
