@@ -12,12 +12,14 @@ if __name__ == '__main__':
     cv2.ocl.setUseOpenCL(False)
     # 加载模型
     model = CNN()
-    model.load_weights('./model/face1')  # 读取模型权重参数
+    model.load_weights('./model/face2')  # 读取模型权重参数
 
     # 框住人脸的矩形边框颜色
     color = (0, 255, 0)
 
     # 捕获指定摄像头的实时视频流
+    temp_dir = "D:/data/face_mine/5.mp4"
+    
     cap = cv2.VideoCapture(0)
 
     # 人脸识别分类器本地存储路径
@@ -53,7 +55,8 @@ if __name__ == '__main__':
                 font = ImageFont.truetype("simkai.ttf", 20, encoding="utf-8")  # 参数1：字体文件路径，参数2：字体大小
                 draw.text((x + 25, y - 95), 'long:{:.2%}'.format(face_probe[0]), (255, 0, 0), font=font)
                 draw.text((x + 25, y - 70), 'bao:{:.2%}'.format(face_probe[1]), (255, 0, 0), font=font)
-                draw.text((x + 25, y - 45), 'oo:{:.2%}'.format(face_probe[3]), (255, 0, 0), font=font)
+                draw.text((x + 25, y - 45), 'yao:{:.2%}'.format(face_probe[2]), (255, 0, 0), font=font)
+                draw.text((x + 25, y - 20), 'yi:{:.2%}'.format(face_probe[3]), (255, 0, 0), font=font)
                 frame = cv2.cvtColor(np.array(pilimg), cv2.COLOR_RGB2BGR)
 
         cv2.imshow("ShowTime", frame)
@@ -67,4 +70,3 @@ if __name__ == '__main__':
     # 释放摄像头并销毁所有窗口
     cap.release()
     cv2.destroyAllWindows()
-

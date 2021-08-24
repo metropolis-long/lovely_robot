@@ -33,7 +33,7 @@ def index(request):
         ppp = requests.post(url, data)
     except:
         print("net err")
-    return HttpResponse("Hello, 7th world welcome for You." + o.user.user_name)
+    return HttpResponse("Hello, 7th world welcome for 6666You888.")
 
 
 

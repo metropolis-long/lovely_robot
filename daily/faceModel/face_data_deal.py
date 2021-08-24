@@ -8,7 +8,9 @@ IMAGE_SIZE = 64  # 将图片大小设置为64*64
 # 按照指定图像大小调整尺寸
 def resize_image(image, height=IMAGE_SIZE, width=IMAGE_SIZE):
     top, bottom, left, right = (0, 0, 0, 0)
-
+    if hasattr(images,'shape'):
+        print(11)
+        return
     # 获取图像尺寸
     h, w, _ = image.shape
 
@@ -44,20 +46,22 @@ images = []
 labels = []
 
 
-def read_path(path_name):
+def read_path(path_name,label=None):
     for dir_item in os.listdir(path_name):
         # 从初始路径开始叠加，合并成可识别的操作路径
         full_path = os.path.abspath(os.path.join(path_name, dir_item))
 
         if os.path.isdir(full_path):  # 如果是文件夹，继续递归调用
-            read_path(full_path)
+            read_path(full_path,dir_item)
         else:  # 文件
-            if dir_item.endswith('.jpg'):
+            if dir_item.endswith('.jpg') or dir_item.endswith('.png'):
                 image = cv2.imread(full_path)
+
                 image = resize_image(image, IMAGE_SIZE, IMAGE_SIZE)
+                print(full_path)
 
                 images.append(image)
-                labels.append(path_name)
+                labels.append(label)
 
     return images, labels
 
@@ -71,18 +75,23 @@ def load_dataset(path_name):
     # 5个人 每个人200张 图片为64 * 64像素,一个像素3个颜色值(RGB)
     images = np.array(images)
     print(images.shape)
-
+    # 1 1 1
+    # 1 1 4 4
     # 标注数据（采用onehot编码），文件夹下都是我的脸部图像，全部指定为0 其他是我舍友的，分别不同指定标签（请注意必须从0开始算标签）
     temp = 0
+    index =0
+    tstr = labels[0]
     for label in labels:
-        if label.endswith('######'):
-            labels[temp] = 0
-        elif label.endswith('@@@@'):
-            labels[temp] = 1
-        temp = temp + 1
+        if label != tstr:
+            tstr = label
+            temp = temp + 1
+        labels[index] = temp
+        index = index + 1
     return images, labels
 
 
 if __name__ == '__main__':
     images, labels = load_dataset("D:/data/face_mine")
+    print(images.shape)
+    print(len(labels))
     print(labels)

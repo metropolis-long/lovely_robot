@@ -18,16 +18,20 @@ class ImageRename():
 
         for item in filelist:
             # 如果是png就把.jpg改成.png
-            if item.endswith('.jpg'):
-                src = os.path.join(os.path.abspath(self.path), item)
-                # 自己可以更改0的个数
-                dst = os.path.join(os.path.abspath(self.path), '0000' + format(str(i), '0>3s') + '.jpg')
-                os.rename(src, dst)
-                print('converting %s to %s ...' % (src, dst))
-                i = i + 1
+            ex = '.jpg'
+            if item.endswith('jpg'):
+                pass
+            elif item.endswith('.png'):
+                ex = '.png'
+            src = os.path.join(os.path.abspath(self.path), item)
+            # 自己可以更改0的个数
+            dst = os.path.join(os.path.abspath(self.path), '0000' + format(str(i), '0>3s') + ex)
+            os.rename(src, dst)
+            print('converting %s to %s ...' % (src, dst))
+            i = i + 1
         print('total %d to rename & converted %d jpgs' % (total_num, i))
 
 
 if __name__ == '__main__':
-    newname = ImageRename(r'D:/data/face_mine')
+    newname = ImageRename(r'D:/data/face_mine/long')
     newname.rename()
