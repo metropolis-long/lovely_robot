@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>791</width>
+    <height>293</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QWidget" name="widget" native="true">
+     <widget class="QLineEdit" name="lineEdit">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>40</y>
+        <width>481</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>40</y>
+        <width>151</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>打开wav音频文件</string>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="text">
+        <string>播放</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="text">
+        <string>暂停</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_5">
+       <property name="text">
+        <string>继续</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_6">
+       <property name="text">
+        <string>停止</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0">
+    <widget class="QPushButton" name="pushButton_8">
+     <property name="text">
+      <string>录音结束</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="text">
+      <string>录音开始</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>dakaiwenjian()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>698</x>
+     <y>54</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>470</x>
+     <y>76</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>bofan()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>64</x>
+     <y>135</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>522</x>
+     <y>90</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>zantin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>215</x>
+     <y>135</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>520</x>
+     <y>136</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_4</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>luyin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>291</x>
+     <y>228</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>524</x>
+     <y>173</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_5</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>jixu()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>401</x>
+     <y>135</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>518</x>
+     <y>126</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_6</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>tinzi()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>593</x>
+     <y>135</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>387</x>
+     <y>107</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_8</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>luyinjiesu()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>539</x>
+     <y>228</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>280</x>
+     <y>165</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>dakaiwenjian()</slot>
+  <slot>bofan()</slot>
+  <slot>tinzi()</slot>
+  <slot>luyin()</slot>
+  <slot>jixu()</slot>
+  <slot>zantin()</slot>
+  <slot>qita()</slot>
+  <slot>luyinjiesu()</slot>
+ </slots>
+</ui>
