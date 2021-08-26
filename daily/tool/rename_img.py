@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import random
 
 
 class ImageRename():
@@ -33,5 +34,9 @@ class ImageRename():
 
 
 if __name__ == '__main__':
-    newname = ImageRename(r'D:/data/face_mine/long')
-    newname.rename()
+    path =r'D:/data/face_mine/'
+    flist = os.listdir(path)
+    for f in flist:
+        fp=os.path.join(path, f)
+        newname = ImageRename(fp)
+        newname.rename()

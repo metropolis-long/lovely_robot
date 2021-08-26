@@ -6,21 +6,26 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 from daily.faceModel.train_model import CNN
+from daily.faceModel.face_data_deal import get_user_number
+
 from djangoProject.settings.base_settings import CV_FACE_MODEL_PATH
 
+
+
 if __name__ == '__main__':
+    nb_classes = get_user_number()
     cv2.ocl.setUseOpenCL(False)
     # 加载模型
     model = CNN()
-    model.load_weights('./model/face2')  # 读取模型权重参数
+    model.load_weights('./model/face0826')  # 读取模型权重参数
 
     # 框住人脸的矩形边框颜色
     color = (0, 255, 0)
 
     # 捕获指定摄像头的实时视频流
-    temp_dir = "D:/data/face_mine/5.mp4"
+    temp_dir = r"D:/data/kk/video/20210826-213754.mp4"
     
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(temp_dir)
 
     # 人脸识别分类器本地存储路径
     cascade_path = CV_FACE_MODEL_PATH
@@ -53,10 +58,10 @@ if __name__ == '__main__':
                 pilimg = Image.fromarray(frame)
                 draw = ImageDraw.Draw(pilimg)  # 图片上打印 出所有人的预测值
                 font = ImageFont.truetype("simkai.ttf", 20, encoding="utf-8")  # 参数1：字体文件路径，参数2：字体大小
-                draw.text((x + 25, y - 95), 'long:{:.2%}'.format(face_probe[0]), (255, 0, 0), font=font)
-                draw.text((x + 25, y - 70), 'bao:{:.2%}'.format(face_probe[1]), (255, 0, 0), font=font)
-                draw.text((x + 25, y - 45), 'yao:{:.2%}'.format(face_probe[2]), (255, 0, 0), font=font)
-                draw.text((x + 25, y - 20), 'yi:{:.2%}'.format(face_probe[3]), (255, 0, 0), font=font)
+                y_max = 95
+                for item in nb_classes:
+                    draw.text((x + 25, y - y_max), '{}:{:.2%}'.format(item,face_probe[nb_classes.index(item)]), (255, 0, 0), font=font)
+                    y_max = y_max - 25
                 frame = cv2.cvtColor(np.array(pilimg), cv2.COLOR_RGB2BGR)
 
         cv2.imshow("ShowTime", frame)

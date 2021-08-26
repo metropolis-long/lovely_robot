@@ -5,9 +5,9 @@ import random
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
 
-from daily.faceModel.face_data_deal import load_dataset, resize_image, IMAGE_SIZE
+from daily.faceModel.face_data_deal import load_dataset, resize_image, get_user_number,IMAGE_SIZE
 
-
+nb_classes = len(get_user_number())
 class Dataset:
     def __init__(self, path_name):
         # 训练集
@@ -24,23 +24,18 @@ class Dataset:
         # 当前库采用的维度顺序
         self.input_shape = None
 
-        self.nb_classes = None
+        self.nb_classes = nb_classes
 
     # 加载数据集并按照交叉验证的原则划分数据集并进行相关预处理工作
     def load(self, img_rows=IMAGE_SIZE, img_cols=IMAGE_SIZE,
-             img_channels=1, nb_classes=5):  # 灰度图 所以通道数为1 5个类别 所以分组数为5
+             img_channels=1):  # 灰度图 所以通道数为1 5个类别 所以分组数为5
         # 加载数据集到内存
         images, labels = load_dataset(self.path_name)
         # 将总数据按0.3比重随机分配给训练集和测试集
-        train_images, test_images, \
-        train_labels, test_labels = train_test_split(
-            images, labels, test_size=0.3,
-            random_state=random.randint(0,100))
+        train_images, test_images, train_labels, test_labels = \
+            train_test_split(images, labels, test_size=0.3,random_state=random.randint(0,100))
         # 由于TensorFlow需要通道数，我们上一步设置为灰度图，所以这里为1，否则彩色图为3
-        train_images = train_images.reshape(
-            train_images.shape[0],
-            img_rows, img_cols,
-            img_channels)
+        train_images = train_images.reshape(train_images.shape[0],img_rows, img_cols,img_channels)
         test_images = test_images.reshape(test_images.shape[0], img_rows, img_cols, img_channels)
         self.input_shape = (img_rows, img_cols, img_channels)
 
@@ -60,7 +55,6 @@ class Dataset:
         self.test_images = test_images
         self.train_labels = train_labels
         self.test_labels = test_labels
-        self.nb_classes = nb_classes
 
 
 # 建立CNN模型
@@ -82,7 +76,7 @@ class CNN(tf.keras.Model):
         self.pool4 = tf.keras.layers.MaxPool2D(pool_size=[2, 2])
         self.flaten1 = tf.keras.layers.Flatten()
         self.dense3 = tf.keras.layers.Dense(units=512, activation=tf.nn.relu)
-        self.dense4 = tf.keras.layers.Dense(units=5)  # 最后分类 5个单位
+        self.dense4 = tf.keras.layers.Dense(units=nb_classes)  # 最后分类 5个单位
 
     # 模型输出
     def call(self, inputs):
@@ -119,8 +113,8 @@ class CNN(tf.keras.Model):
 if __name__ == '__main__':
 
     learning_rate = 0.001  # 学习率
-    batch = 16  # batch数
-    EPOCHS = 120  # 学习轮数
+    batch = 16 # batch数
+    EPOCHS = 80  # 学习轮数
 
     dataset = Dataset('D:/data/face_mine/')  # 数据都保存在这个文件夹下
     dataset.load()
@@ -172,5 +166,5 @@ if __name__ == '__main__':
         print(template.format(epoch + 1, train_loss.result(), train_accuracy.result(), test_loss.result(),
                               test_accuracy.result()))  # 打印
 
-    model.save_weights('./model/face2')  # 保存权重模型 命名为face1
+    model.save_weights('./model/face0826')  # 保存权重模型 命名为face1
 

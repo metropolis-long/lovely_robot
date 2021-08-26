@@ -1,2 +1,2 @@
-model_checkpoint_path: "face2"
-all_model_checkpoint_paths: "face2"
+model_checkpoint_path: "face0826"
+all_model_checkpoint_paths: "face0826"
