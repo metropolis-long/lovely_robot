@@ -25,7 +25,7 @@ if __name__ == '__main__':
     # 捕获指定摄像头的实时视频流
     temp_dir = r"D:/data/kk/video/20210826-213754.mp4"
     
-    cap = cv2.VideoCapture(temp_dir)
+    cap = cv2.VideoCapture(0)
 
     # 人脸识别分类器本地存储路径
     cascade_path = CV_FACE_MODEL_PATH

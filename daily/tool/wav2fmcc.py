@@ -14,13 +14,13 @@ def get_wav_mfcc(wav_path):
 
     # print(waveData)
 
-    # plt.rcParams['savefig.dpi'] = 300 #图片像素
-    # plt.rcParams['figure.dpi'] = 300 #分辨率
-    # plt.specgram(waveData[0],Fs = framerate, scale_by_freq = True, sides = 'default')
-    # plt.ylabel('Frequency(Hz)')
-    # plt.xlabel('Time(s)')
-    # plt.title('wa')
-    # plt.show()
+    plt.rcParams['savefig.dpi'] = 300 #图片像素
+    plt.rcParams['figure.dpi'] = 300 #分辨率
+    plt.specgram(waveData[0],Fs = framerate, scale_by_freq = True, sides = 'default')
+    plt.ylabel('Frequency(Hz)')
+    plt.xlabel('Time(s)')
+    plt.title('wa')
+    plt.show()
 
     # 对音频数据进行长度大小的切割，保证每一个的长度都是一样的【因为训练文件全部是1秒钟长度，16000帧的，所以这里需要把每个语音文件的长度处理成一样的】
     data = list(np.array(waveData[0]))

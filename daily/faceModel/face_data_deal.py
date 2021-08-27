@@ -94,7 +94,7 @@ def load_dataset(path_name):
 
 
 def get_user_number():
-    with open('./model/clazz.txt','r') as f:
+    with open('./model/clazz.txt','r',encoding='utf-8') as f:
         return f.read().splitlines()
 
 if __name__ == '__main__':
