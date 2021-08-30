@@ -25,8 +25,8 @@ def get_word_split_dir():
 
 
 if __name__ == "__main__":
-    for w in __my_words__:
-        print(" ".join(w))
+    for w in get_word_split_dir():
+        print(", ".join(w))
     print('split words over！')
 
 
