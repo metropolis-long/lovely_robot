@@ -10,6 +10,7 @@ def split_words_dir(dir_path):
     today = utils.get_today_str()
     for d in dir:
         full_path = os.path.abspath(os.path.join(dir_path, d))
+        # 是目录，并且包含今天日期
         if full_path.find(today) < 0 and os.path.isdir(full_path):
             split_words_dir(full_path)
         else:

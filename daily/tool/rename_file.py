@@ -33,9 +33,9 @@ class ImageRename():
         print('total %d to rename & converted %d jpgs' % (total_num, i))
 
 
-class FileRename():
+class WaveRename():
     """
-    图片重命名
+    文件重命名
     """
     def __init__(self,path):
         # 换成自己图片集所在路径
@@ -45,14 +45,9 @@ class FileRename():
         filelist = os.listdir(self.path)
         total_num = len(filelist)
         i = 1
-
         for item in filelist:
             # 如果是png就把.jpg改成.png
             ex = '.wav'
-            if item.endswith('wav'):
-                pass
-            elif item.endswith('.mp3'):
-                ex = '.wav'
             src = os.path.join(os.path.abspath(self.path), item)
             # 自己可以更改0的个数
             dst = os.path.join(os.path.abspath(self.path), '0000' + format(str(i), '0>3s') + ex)
@@ -63,7 +58,7 @@ class FileRename():
 
 
 if __name__ == '__main__':
-    path =r'D:/data/face_mine/'
+    path =r'D:/data/voice/'
     flist = os.listdir(path)
     for f in flist:
         fp=os.path.join(path, f)
