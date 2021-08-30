@@ -14,6 +14,7 @@ def split_words_dir(dir_path):
         if full_path.find(today) < 0 and os.path.isdir(full_path):
             split_words_dir(full_path)
         elif os.path.isdir(full_path):
+            print(d)
             ind = d.index(today)
             word = d[ind+len(today):]
             splits = jieba.cut(word)
@@ -35,6 +36,7 @@ def split_every_word_dir(dir_path):
         if full_path.find(today) < 0 and os.path.isdir(full_path):
             split_every_word_dir(full_path)
         elif os.path.isdir(full_path):
+            print(d)
             ind = d.index(today)
             word = d[ind + len(today):]
             splits = ",".join(word)
