@@ -1,9 +1,9 @@
-from pydub import AudioSegment
-from pydub.silence import split_on_silence
 import os
 
+from pydub import AudioSegment
+from pydub.silence import split_on_silence
+
 from daily.tool import utils
-from daily.tool.split_words import SplitWords
 
 
 class SplitAudio():
@@ -15,7 +15,6 @@ class SplitAudio():
         self.dirs = {}
 
     def split(self):
-
         sound_file_path = self.__get_sounds_files__()
         print(sound_file_path)
         print(self.dirs)
@@ -33,7 +32,7 @@ class SplitAudio():
         ind = sq_wds.index(today)
         word = sq_wds[ind + len(today):]
         try_split_times = 10
-        min_silence_len = 400 # 1 sounds speak 2 or 3 words
+        min_silence_len = 400  # 1 sounds speak 2 or 3 words
         speak_time = 40
         keep_silence = 500
         while True:
@@ -49,11 +48,13 @@ class SplitAudio():
                                       keep_silence=keep_silence)
             print(len(word), len(chunks))
             if len(word) == len(chunks):
-                print('总分段：', len(chunks),'成功')
+                if os.path.exists(self.out_path + f"{sq_wds}") is not True:
+                    os.mkdir(self.out_path + f"{sq_wds}")
+                print('总分段：', len(chunks), '成功')
                 for i, chunk in enumerate(chunks):
-                    if os.path.exists(self.out_path + "chunk{0}.wav".format(word[i])):
-                        os.remove(self.out_path + "chunk{0}.wav".format(word[i]))
-                    chunk.export(self.out_path + "chunk{0}.wav".format(word[i]), format="wav")
+                    if os.path.exists(self.out_path + f"{sq_wds}/{word[i]}.wav"):
+                        os.remove(self.out_path + f"{sq_wds}/{word[i]}.wav")
+                    chunk.export(self.out_path + f"{sq_wds}/{word[i]}.wav", format="wav")
                 return True
             elif len(word) > len(chunks):  # voice is splited less than exception
                 min_silence_len = min_silence_len - speak_time
@@ -83,7 +84,10 @@ class SplitAudio():
 
 
 if __name__ == "__main__":
-    p = r"D:/data/voice"
+    p = r"D:/data/voice/"
     o = r"D:/data/out/"
     sa = SplitAudio(p, o)
+    i = 2
+    k = "33"
+    print("{0}/{1}".format(i, k))
     sa.split()
