@@ -14,7 +14,7 @@ class Win(QWidget,Ui_Form):
         self.CHANNELS = 2
         self.RATE = 44100
         self.RECORD_SECONDS = 5  # 录音时间
-        self.WAVE_OUTPUT_FILENAME = "D:/output.wav"   #录音时要写入的文件名
+        self.WAVE_OUTPUT_FILENAME = "D:/data/output.wav"   #录音时要写入的文件名
         self.p = pyaudio.PyAudio()  # 创建播放器
         self.data=''
         self.setupUi(self)

@@ -22,7 +22,7 @@ class SplitAudio():
         for d in self.dirs:
             print(d)
             for file in sound_file_path:
-                print(file)
+                print('开始分割',file)
                 self.__split_voice__(file, d)
         print("ok")
 
@@ -42,19 +42,28 @@ class SplitAudio():
                 return False
             try_split_times = try_split_times - 1
             # min_silence_len以沉默500毫秒，切割音频文件
-            # #silence_thresh 低于45分贝的声音过滤
+            # #silence_thresh 低于40分贝的声音过滤
             # keep_silence为截出的每个音频添加多少ms无声
-            chunks = split_on_silence(sound, min_silence_len=min_silence_len, silence_thresh=-45,
+            chunks = split_on_silence(sound, min_silence_len=min_silence_len, silence_thresh=-40,
                                       keep_silence=keep_silence)
             print(len(word), len(chunks))
             if len(word) == len(chunks):
-                if os.path.exists(self.out_path + f"{sq_wds}") is not True:
-                    os.mkdir(self.out_path + f"{sq_wds}")
                 print('总分段：', len(chunks), '成功')
                 for i, chunk in enumerate(chunks):
-                    if os.path.exists(self.out_path + f"{sq_wds}/{word[i]}.wav"):
-                        os.remove(self.out_path + f"{sq_wds}/{word[i]}.wav")
-                    chunk.export(self.out_path + f"{sq_wds}/{word[i]}.wav", format="wav")
+                    # make sure dir is exists
+                    t_dir = self.out_path + f"{word[i]}"
+                    if os.path.exists(t_dir) is not True:
+                        os.makedirs(t_dir)
+                    # save format:  /data/voice/out/A/A000.wav
+                    index = 0
+                    src = os.path.join(os.path.abspath(t_dir), word[i] +format(str(index), '0>3s') +  '.wav')
+                    while True:
+                        if os.path.exists(src):
+                            index=index+1
+                            src = os.path.join(os.path.abspath(t_dir), word[i] + format(str(index), '0>3s') + '.wav')
+                        else:
+                            chunk.export(src, format="wav")
+                            break
                 return True
             elif len(word) > len(chunks):  # voice is splited less than exception
                 min_silence_len = min_silence_len - speak_time
@@ -85,9 +94,11 @@ class SplitAudio():
 
 if __name__ == "__main__":
     p = r"D:/data/voice/"
-    o = r"D:/data/out/"
+    o = r"D:/data/voice/out/"
     sa = SplitAudio(p, o)
     i = 2
     k = "33"
     print("{0}/{1}".format(i, k))
     sa.split()
+    # for i in range(1111):
+    #     print('0000' + format(str(i), '0>3s')+"A")

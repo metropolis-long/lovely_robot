@@ -1,6 +1,8 @@
 import numpy as np
 import wave
 import matplotlib.pyplot as plt
+
+
 def get_wav_mfcc(wav_path):
     f = wave.open(wav_path,'rb')
     params = f.getparams()
@@ -42,4 +44,6 @@ def get_wav_mfcc(wav_path):
     return data
 
 
-get_wav_mfcc("D:/output.wav")
+# get_wav_mfcc("D:/data/out/20210831ABCDE/B.wav")
+# get_wav_mfcc("D:/data/voice/20210831ABCDE/0000001.wav")
+get_wav_mfcc("D:/data/output.wav" )
