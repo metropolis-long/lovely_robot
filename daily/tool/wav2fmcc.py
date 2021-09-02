@@ -40,7 +40,6 @@ def get_wav_mfcc(wav_path):
     # 平方之后，开平方，取正数，值的范围在  0-1  之间
     data = data ** 2
     data = data ** 0.5
-    print(data)
     return data
 
 
